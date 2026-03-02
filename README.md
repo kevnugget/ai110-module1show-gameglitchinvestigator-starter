@@ -48,4 +48,6 @@ Phase 1: Four bugs I found in the program are:
 - The game shows an incorrect range in display
    - st.info always says "between 1 and 100" instead of using low and high variables to determine the range for guessing.
 
-Phase 2: 
+Phase 2: The fix for the attempts was a simple, but difficult one. Although the fix itself was very simple, the debugging to find the actual error of what was causing the error was not intuitive. At first, it seemed like the error was in the showcasing of the attempts, where it may have subtracted the total attempts by the user attempts.  It took deeper investigation to find that the actual error was the initial attempts being set to 1 instead of 0.
+
+Guiding Hint: Look carefully at what value attempts starts at before the user has made any guesses. If the display says fewer attempts than expected right from the start, the issue might not be in the display logic itself; it could be in the initialization.
