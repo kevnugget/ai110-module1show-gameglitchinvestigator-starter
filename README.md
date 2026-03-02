@@ -36,3 +36,16 @@ It wrote the code, ran away, and now the game is unplayable.
 ## 🚀 Stretch Features
 
 - [ ] [If you choose to complete Challenge 4, insert a screenshot of your Enhanced Game UI here]
+
+Phase 1: Four bugs I found in the program are:
+- When a game ends, the "New Game" button does not work. It changes the secret number, but the user is unable to actually enter their guesses.
+   - The button fails to actually reset the game because it only resets attempts and secret. It does not reset the st.session_state.history, st.session_state.status, and st.session_state.score. It also hardcodes the difficulty range as it is strictly 1-100, but low-high determined by the difficulty range. Since it doesn't reset those variables, it means that the player carries over their previous's games history, win/status, and score into the new game.
+- The hint is telling the user the incorrect range to find the secret number. The logic is flipped, where a higher guess is told to "Go HIGHER" whereas a lower guess is told to "Go LOWER"
+   - The logic in the "Check Guess" function is flipped. When a user enters a guess that is too high, we want the game to print "GO LOWER" to get the user to lower their guess and vice versa. This will allow them to actually get closer to the secret, rather than farther away.
+- The "Attempts Left" does not count the first attempt that user inputs. The second input and successive ones do count towards the "Attempts Left."
+   - The st.info display uses attempt_limit - st.session_state.attempts, and attempts starts at 1.When the user submits, attempts increments by 1, but the st.info line runs before the if submit: block in the page. So on that rerun, the display still reads incorrect attempts - 1 because the increment hasn't happened yet in that pass. The increment happens lower on the page, and its effect only shows on the next rerun.
+      - Simply put, load → shows wrong attempts by 1, first guess rerun → shows same wrong attempts by 1 (increment happens after display), second guess rerun → shows correct attempts 
+- The game shows an incorrect range in display
+   - st.info always says "between 1 and 100" instead of using low and high variables to determine the range for guessing.
+
+Phase 2: 
